@@ -74,7 +74,8 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "npm run lint -- --quiet --fix"
+      "npm run lint -- --quiet --fix",
+      "prettier --write", "git add"
     ]
   },
   "husky": {
