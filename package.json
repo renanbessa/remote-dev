@@ -18,14 +18,16 @@
     "cypress:test": "start-server-and-test start http://localhost:3000 cypress:run"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.0.15",
     "@chakra-ui/react": "^1.1.4",
     "@emotion/react": "^11.1.4",
     "@emotion/styled": "^11.0.0",
+    "@fontsource/open-sans": "^4.5.0",
     "@reduxjs/toolkit": "^1.6.0",
     "framer-motion": "^3.2.1",
     "next": "10.2.0",
     "next-compose-plugins": "^2.2.1",
-    "next-i18next": "^7.0.1",
+    "next-i18next": "^8.7.0",
     "prettier": "^2.2.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -43,6 +45,7 @@
     "@svgr/cli": "^5.5.0",
     "@testing-library/react": "^11.2.3",
     "@testing-library/react-hooks": "^5.0.0",
+    "@types/mocha": "^9.0.0",
     "@types/node": "^14.14.13",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
@@ -75,7 +78,8 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "npm run lint -- --quiet --fix",
-      "prettier --write", "git add"
+      "prettier --write",
+      "git add"
     ]
   },
   "husky": {

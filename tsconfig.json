@@ -44,10 +44,10 @@
         "src/styles"
       ],
       "@components/icons/*": [
-        "src/components/icons/*"
+        "src/components/ui/icons/*"
       ],
       "@components/icons": [
-        "src/components/icons"
+        "src/components/ui/icons"
       ],
       "@redux/*": [
         "src/redux/*"

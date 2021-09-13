@@ -15,11 +15,12 @@
   ],
   "overrides": [
       {
-        "files": ["*.js"],
+        "files": ["*.ts", "*.tsx", "*.js"],
         "rules": {
           "react/react-in-jsx-scope": "off",
           "prettier/prettier": "error",
           "@typescript-eslint/explicit-module-boundary-types": "off",
+          "@typescript-eslint/no-unused-vars": "off",
           "@typescript-eslint/no-var-requires": 0
         }
       }

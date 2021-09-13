@@ -1,26 +1,26 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit'
 
 interface ICounter {
-	count: number;
+  count: number
 }
 
 const initialState: ICounter = {
-	count: 20,
-};
+  count: 20,
+}
 
 const counterSlice = createSlice({
-	name: 'counter',
-	initialState,
-	reducers: {
-		increase: (state) => {
-			state.count++;
-		},
-		decrease: (state) => {
-			state.count--;
-		},
-	},
-});
+  name: 'counter',
+  initialState,
+  reducers: {
+    increase: (state) => {
+      state.count++
+    },
+    decrease: (state) => {
+      state.count--
+    },
+  },
+})
 
-export const {increase, decrease} = counterSlice.actions;
+export const {increase, decrease} = counterSlice.actions
 
-export default counterSlice.reducer;
+export default counterSlice.reducer

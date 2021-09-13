@@ -1,0 +1,10 @@
+{
+  "menu": {
+    "home": "Home",
+    "categories": "Categorias",
+    "blog": "Blog"
+  },
+  "post-job": {
+    "title": "Post a job"
+  }
+}
