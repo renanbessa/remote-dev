@@ -36,4 +36,8 @@ export const colors: Colors = Object.freeze({
     800: '#004435',
     900: '#00221a',
   },
+  palette: {
+    primary: '#212529',
+    secondary: '#f03e3e',
+  },
 })

@@ -7,9 +7,9 @@ import React, {useEffect, useState} from 'react'
 const API_URL = 'https://official-joke-api.appspot.com/jokes/programming/random'
 
 export const FetchExample = () => {
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<any>(null)
   const [isLoaded, setIsLoaded] = useState(false)
-  const [data, setData] = useState([])
+  const [data, setData] = useState<any[]>([])
 
   console.log('data: ', data)
   // Note: the empty deps array [] means

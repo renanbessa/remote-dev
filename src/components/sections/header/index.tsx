@@ -25,6 +25,7 @@ export const Header = (props: C.FlexProps) => {
   const toggleMenu = () => setShow(!show)
 
   return (
+    // <C.Container>
     <C.Flex
       as="nav"
       align="center"
@@ -33,8 +34,10 @@ export const Header = (props: C.FlexProps) => {
       w="100%"
       mb={8}
       p={8}
-      bg={['primary.500', 'primary.500', 'transparent', 'transparent']}
+      bg={'transparent'}
       color={['white', 'white', 'primary.700', 'primary.700']}
+      pos="fixed"
+      zIndex={2}
       {...props}
     >
       <C.Flex align="center">
@@ -82,5 +85,6 @@ export const Header = (props: C.FlexProps) => {
         </C.Flex>
       </C.Box>
     </C.Flex>
+    // </C.Container>
   )
 }
