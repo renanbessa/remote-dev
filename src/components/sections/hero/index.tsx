@@ -6,7 +6,7 @@ import {Button} from '@components'
 export const Main: React.FC = () => {
   const theme = useTheme()
   return (
-    <Box bg="main.100" color="white" textAlign="center" py={10}>
+    <Box bg="main.100" color="white" textAlign="center" py={20}>
       <h1 data-test="main-heading" style={{fontSize: theme.fontSizes['5xl']}}>
         superplate
       </h1>

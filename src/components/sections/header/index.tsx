@@ -2,22 +2,25 @@ import * as C from '@chakra-ui/react'
 import * as I from '@chakra-ui/icons'
 import {useColorModeValue, useDisclosure} from '@chakra-ui/react'
 import {Logo} from '@components/ui/logo'
+import {useTranslation} from 'next-i18next'
 
 export const Header = () => {
   const {isOpen, onToggle} = useDisclosure()
+
+  const {t} = useTranslation('navbar')
 
   return (
     <C.Box>
       <C.Flex
         as={'header'}
-        bg={useColorModeValue('white', 'gray.800')}
+        bg={useColorModeValue('transparent', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
         minH={'60px'}
         align={'center'}
         pos="fixed"
         top="0"
         w="100%"
-        boxShadow="sm"
+        py={5}
       >
         <C.Container display="flex" alignItems="center">
           <C.Flex
@@ -41,10 +44,10 @@ export const Header = () => {
 
           <C.Flex flex={{base: 1}} justify={{base: 'center', md: 'start'}}>
             <Logo />
+          </C.Flex>
 
-            <C.Flex as={'nav'} display={{base: 'none', md: 'flex'}} ml={10}>
-              <DesktopNav />
-            </C.Flex>
+          <C.Flex as={'nav'} display={{base: 'none', md: 'flex'}} mr={10}>
+            <DesktopNav />
           </C.Flex>
 
           <C.Stack
@@ -56,24 +59,15 @@ export const Header = () => {
             <C.Button
               as={'a'}
               fontSize={'sm'}
-              fontWeight={400}
-              variant={'link'}
-              href={'#'}
-            >
-              Sign In
-            </C.Button>
-            <C.Button
-              display={{base: 'none', md: 'inline-flex'}}
-              fontSize={'sm'}
               fontWeight={600}
               color={'white'}
-              bg={'pink.400'}
+              bg={'red.500'}
               href={'#'}
               _hover={{
-                bg: 'pink.300',
+                bg: 'red.400',
               }}
             >
-              Sign Up
+              {t('post-job.title')}
             </C.Button>
           </C.Stack>
         </C.Container>
@@ -87,25 +81,19 @@ export const Header = () => {
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200')
+  const linkColor = useColorModeValue('white', 'gray.200')
   const linkHoverColor = useColorModeValue('gray.800', 'white')
   const popoverContentBgColor = useColorModeValue('white', 'gray.800')
 
   return (
-    <C.List
-      display={'flex'}
-      alignItems={'center'}
-      spacing={4}
-      flexDirection={'row'}
-    >
+    <C.List display={'flex'} alignItems={'center'}>
       {NAV_ITEMS.map((navItem) => (
-        <C.ListItem as={'li'} key={navItem.label}>
+        <C.ListItem key={navItem.label}>
           <C.Popover trigger={'hover'} placement={'bottom-start'}>
             <C.PopoverTrigger>
               <C.Link
-                p={2}
+                p={3}
                 href={navItem.href ?? '#'}
-                fontSize={'sm'}
                 fontWeight={500}
                 color={linkColor}
                 _hover={{
@@ -253,41 +241,19 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'Inspiration',
-    children: [
-      {
-        label: 'Explore Design Work',
-        subLabel: 'Trending Design to inspire you',
-        href: '#',
-      },
-      {
-        label: 'New & Noteworthy',
-        subLabel: 'Up-and-coming Designers',
-        href: '#',
-      },
-    ],
+    label: 'Vagas',
+    href: '/',
   },
   {
-    label: 'Find Work',
-    children: [
-      {
-        label: 'Job Board',
-        subLabel: 'Find your dream design job',
-        href: '#',
-      },
-      {
-        label: 'Freelance Projects',
-        subLabel: 'An exclusive list for contract work',
-        href: '#',
-      },
-    ],
+    label: 'Sobre',
+    href: '/sobre',
   },
   {
-    label: 'Learn Design',
-    href: '#',
+    label: 'Blog',
+    href: '/blog',
   },
   {
-    label: 'Hire Designers',
-    href: '#',
+    label: 'Contato',
+    href: '/contato',
   },
 ]

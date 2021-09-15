@@ -1,10 +1,11 @@
 {
   "menu": {
-    "home": "Home",
-    "categories": "Categorias",
-    "blog": "Blog"
+    "vagas": "Vagas",
+    "sobre": "Sobre",
+    "blog": "Blog",
+    "contato": "Contato"
   },
   "post-job": {
-    "title": "Post a job"
+    "title": "Publicar Vaga"
   }
 }
