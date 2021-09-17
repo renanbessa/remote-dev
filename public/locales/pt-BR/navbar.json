@@ -1,11 +1,23 @@
 {
-  "menu": {
-    "vagas": "Vagas",
-    "sobre": "Sobre",
-    "blog": "Blog",
-    "contato": "Contato"
-  },
-  "post-job": {
+  "menu": [
+    {
+      "label": "Vagas",
+      "href": "/"
+    },
+    {
+      "label": "Sobre",
+      "href": "/sobre"
+    },
+     {
+      "label": "Blog",
+      "href": "/blog"
+    },
+    {
+      "label": "Contato",
+      "href": "/contato"
+    }
+  ],
+  "postJob": {
     "title": "Publicar Vaga"
   }
 }

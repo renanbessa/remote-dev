@@ -3,17 +3,35 @@ import * as I from '@chakra-ui/icons'
 import {useColorModeValue, useDisclosure} from '@chakra-ui/react'
 import {Logo} from '@components/ui/logo'
 import {useTranslation} from 'next-i18next'
+import React, {useEffect, useState} from 'react'
+import {useScroll} from '@hooks/useScroll'
+import {DesktopNavProps, NavItemProps} from './types'
 
 export const Header = () => {
   const {isOpen, onToggle} = useDisclosure()
 
   const {t} = useTranslation('navbar')
 
+  const {onCross} = useScroll()
+  const [hasBackground, setHasBackground] = useState(false)
+
+  useEffect(() => {
+    const listener = onCross({
+      offset: 30,
+      callback: (e) => setHasBackground(e.isAbove),
+    })
+
+    setHasBackground(listener.current.isAbove)
+  }, [])
+
   return (
     <C.Box>
       <C.Flex
         as={'header'}
-        bg={useColorModeValue('transparent', 'gray.800')}
+        bg={useColorModeValue(
+          hasBackground ? 'white' : 'transparent',
+          'gray.800'
+        )}
         color={useColorModeValue('gray.600', 'white')}
         minH={'60px'}
         align={'center'}
@@ -47,7 +65,7 @@ export const Header = () => {
           </C.Flex>
 
           <C.Flex as={'nav'} display={{base: 'none', md: 'flex'}} mr={10}>
-            <DesktopNav />
+            <DesktopNav hasBackground={hasBackground} />
           </C.Flex>
 
           <C.Stack
@@ -67,33 +85,35 @@ export const Header = () => {
                 bg: 'red.400',
               }}
             >
-              {t('post-job.title')}
+              {t('postJob.title')}
             </C.Button>
           </C.Stack>
         </C.Container>
       </C.Flex>
-
-      <C.Collapse in={isOpen} animateOpacity>
-        <MobileNav />
-      </C.Collapse>
     </C.Box>
   )
 }
 
-const DesktopNav = () => {
-  const linkColor = useColorModeValue('white', 'gray.200')
-  const linkHoverColor = useColorModeValue('gray.800', 'white')
+const DesktopNav = ({hasBackground}: DesktopNavProps) => {
+  const {t} = useTranslation('navbar')
+  const linkColor = useColorModeValue(
+    hasBackground ? 'black' : 'white',
+    'gray.200'
+  )
+  const linkHoverColor = useColorModeValue('gray.400', 'white')
   const popoverContentBgColor = useColorModeValue('white', 'gray.800')
+
+  const navItems = t<string, NavItemProps[]>('menu', {returnObjects: true})
 
   return (
     <C.List display={'flex'} alignItems={'center'}>
-      {NAV_ITEMS.map((navItem) => (
-        <C.ListItem key={navItem.label}>
+      {navItems?.map((item: NavItemProps, index: number) => (
+        <C.ListItem key={index}>
           <C.Popover trigger={'hover'} placement={'bottom-start'}>
             <C.PopoverTrigger>
               <C.Link
                 p={3}
-                href={navItem.href ?? '#'}
+                href={item.href ?? '#'}
                 fontWeight={500}
                 color={linkColor}
                 _hover={{
@@ -101,159 +121,12 @@ const DesktopNav = () => {
                   color: linkHoverColor,
                 }}
               >
-                {navItem.label}
+                {item.label}
               </C.Link>
             </C.PopoverTrigger>
-
-            {navItem.children && (
-              <C.PopoverContent
-                border={0}
-                boxShadow={'xl'}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={'xl'}
-                minW={'sm'}
-              >
-                <C.Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </C.Stack>
-              </C.PopoverContent>
-            )}
           </C.Popover>
         </C.ListItem>
       ))}
     </C.List>
   )
 }
-
-const DesktopSubNav = ({label, href, subLabel}: NavItem) => {
-  return (
-    <C.Link
-      href={href}
-      role={'group'}
-      display={'block'}
-      p={2}
-      rounded={'md'}
-      _hover={{bg: useColorModeValue('pink.50', 'gray.900')}}
-    >
-      <C.Stack direction={'row'} align={'center'}>
-        <C.Box>
-          <C.Text
-            transition={'all .3s ease'}
-            _groupHover={{color: 'pink.400'}}
-            fontWeight={500}
-          >
-            {label}
-          </C.Text>
-          <C.Text fontSize={'sm'}>{subLabel}</C.Text>
-        </C.Box>
-        <C.Flex
-          transition={'all .3s ease'}
-          transform={'translateX(-10px)'}
-          opacity={0}
-          _groupHover={{opacity: '100%', transform: 'translateX(0)'}}
-          justify={'flex-end'}
-          align={'center'}
-          flex={1}
-        >
-          <C.Icon color={'pink.400'} w={5} h={5} as={I.ChevronRightIcon} />
-        </C.Flex>
-      </C.Stack>
-    </C.Link>
-  )
-}
-
-const MobileNav = () => {
-  return (
-    <C.Stack
-      bg={useColorModeValue('white', 'gray.800')}
-      p={4}
-      display={{md: 'none'}}
-    >
-      {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} />
-      ))}
-    </C.Stack>
-  )
-}
-
-const MobileNavItem = ({label, children, href}: NavItem) => {
-  const {isOpen, onToggle} = useDisclosure()
-
-  return (
-    <C.Stack spacing={4} onClick={children && onToggle}>
-      <C.Flex
-        py={2}
-        as={C.Link}
-        href={href ?? '#'}
-        justify={'space-between'}
-        align={'center'}
-        _hover={{
-          textDecoration: 'none',
-        }}
-      >
-        <C.Text
-          fontWeight={600}
-          color={useColorModeValue('gray.600', 'gray.200')}
-        >
-          {label}
-        </C.Text>
-        {children && (
-          <C.Icon
-            as={I.ChevronDownIcon}
-            transition={'all .25s ease-in-out'}
-            transform={isOpen ? 'rotate(180deg)' : ''}
-            w={6}
-            h={6}
-          />
-        )}
-      </C.Flex>
-
-      <C.Collapse in={isOpen} animateOpacity style={{marginTop: '0!important'}}>
-        <C.Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
-          align={'start'}
-        >
-          {children &&
-            children.map((child) => (
-              <C.Link key={child.label} py={2} href={child.href}>
-                {child.label}
-              </C.Link>
-            ))}
-        </C.Stack>
-      </C.Collapse>
-    </C.Stack>
-  )
-}
-
-interface NavItem {
-  label: string
-  subLabel?: string
-  children?: Array<NavItem>
-  href?: string
-}
-
-const NAV_ITEMS: Array<NavItem> = [
-  {
-    label: 'Vagas',
-    href: '/',
-  },
-  {
-    label: 'Sobre',
-    href: '/sobre',
-  },
-  {
-    label: 'Blog',
-    href: '/blog',
-  },
-  {
-    label: 'Contato',
-    href: '/contato',
-  },
-]
