@@ -66,7 +66,7 @@ export const Header = () => {
               size={'md'}
               icon={
                 isOpen ? (
-                  <I.CloseIcon w={3} h={3} />
+                  <I.CloseIcon w={5} h={5} />
                 ) : (
                   <I.HamburgerIcon w={5} h={5} />
                 )
@@ -125,15 +125,21 @@ export const Header = () => {
         </C.Container>
 
         {isOpen ? (
-          <C.Box pb={4} display={{md: 'none'}}>
-            <C.Stack
-              as={'nav'}
-              spacing={4}
-              color={useColorModeValue(
-                hasBackground ? 'black' : 'white',
-                'gray.800'
-              )}
-            >
+          <C.Box
+            pos="absolute"
+            top={'100%'}
+            left={0}
+            w={'80vw'}
+            h={'100vh'}
+            bg={'main.100'}
+            display={{md: 'none'}}
+            zIndex={8}
+            py={'20px'}
+            px={'8px'}
+            my={0}
+            mx={'calc(50% - 50vw)'}
+          >
+            <C.Stack as={'nav'} spacing={4} color={'white'}>
               <C.List display={'flex'} flexDirection="column">
                 {navItems?.map((item: NavItemProps, index: number) => (
                   <NavLink key={index} href={item.href}>
