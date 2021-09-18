@@ -18,6 +18,7 @@
     }
   ],
   "postJob": {
-    "title": "Publicar Vaga"
+    "title": "Publicar Vaga",
+    "href": "/publicar-vaga"
   }
 }

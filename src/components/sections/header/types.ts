@@ -12,3 +12,8 @@ export interface NavItemProps {
   label: string
   href: string
 }
+
+export interface NavLinkProps {
+  children: React.ReactNode
+  href: string
+}
