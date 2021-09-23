@@ -8,6 +8,7 @@ import {sizes} from './foundations/sizes'
 import {fonts} from './foundations/fonts'
 
 import {Container} from './components/Container'
+import {JobCard} from './components/JobCard'
 
 /**
  * This file is generated for providing a custom theme to Chakra UI
@@ -25,6 +26,7 @@ const overrides = {
 
   components: {
     Container,
+    JobCard,
   },
 }
 

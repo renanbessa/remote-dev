@@ -1,18 +1,18 @@
 import Link from 'next/link'
 import {sanitize} from '@utils/miscellaneous'
+import * as C from '@chakra-ui/react'
+import {useStyleConfig} from '@chakra-ui/react'
 
 const JobCard = ({job}) => {
+  const styles = useStyleConfig('JobCard')
   return (
-    <div className="mb-8">
+    <C.Box __css={styles}>
       <Link href={`/vagas-remotas/${job?.slug}/`}>
         <a>
-          <h2
-            className="font-bold mb-3 text-lg hover:text-blue-500"
-            dangerouslySetInnerHTML={{__html: sanitize(job?.title ?? '')}}
-          />
+          <h2 dangerouslySetInnerHTML={{__html: sanitize(job?.title ?? '')}} />
         </a>
       </Link>
-    </div>
+    </C.Box>
   )
 }
 
