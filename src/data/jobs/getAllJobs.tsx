@@ -24,3 +24,17 @@ export const GetAllJobs = gql`
     }
   }
 `
+/**
+ * Get job slugs.
+ *
+ */
+export const GetJobSlugs = gql`
+  query JobSlugs {
+    vagas: vagas(last: 1) {
+      nodes {
+        id
+        slug
+      }
+    }
+  }
+`
