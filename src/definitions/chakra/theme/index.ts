@@ -9,6 +9,7 @@ import {fonts} from './foundations/fonts'
 
 import {Container} from './components/Container'
 import {JobCard} from './components/JobCard'
+import {Link} from './components/Link'
 
 /**
  * This file is generated for providing a custom theme to Chakra UI
@@ -27,6 +28,7 @@ const overrides = {
   components: {
     Container,
     JobCard,
+    Link,
   },
 }
 

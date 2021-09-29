@@ -1,18 +1,28 @@
-import Link from 'next/link'
+import NextLink from 'next/link'
 import {sanitize} from '@utils/miscellaneous'
 import * as C from '@chakra-ui/react'
 import {useStyleConfig} from '@chakra-ui/react'
 
-const JobCard = ({job}) => {
+const JobCard = ({job}: any) => {
   const styles = useStyleConfig('JobCard')
   return (
-    <C.Box __css={styles}>
-      <Link href={`/vagas-remotas/${job?.slug}/`}>
-        <a>
-          <h2 dangerouslySetInnerHTML={{__html: sanitize(job?.title ?? '')}} />
-        </a>
-      </Link>
-    </C.Box>
+    <C.Flex __css={styles}>
+      <C.SimpleGrid columns={2} spacing={10} alignItems={'center'}>
+        <NextLink href={`/vagas-remotas/${job?.slug}/`} passHref>
+          <C.Link variant={'basic'}>
+            <C.Stack>
+              <C.Box as="span">{`${job?.author?.node?.firstName} ${job?.author?.node?.lastName}`}</C.Box>
+              <C.Heading
+                as="h2"
+                size="sm"
+                dangerouslySetInnerHTML={{__html: sanitize(job?.title ?? '')}}
+              />
+            </C.Stack>
+          </C.Link>
+        </NextLink>
+        <C.Box as="span">{job?.date}</C.Box>
+      </C.SimpleGrid>
+    </C.Flex>
   )
 }
 

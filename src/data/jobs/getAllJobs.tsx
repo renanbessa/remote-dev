@@ -13,6 +13,12 @@ export const GetAllJobs = gql`
           date
           title
           slug
+          author {
+            node {
+              firstName
+              lastName
+            }
+          }
         }
       }
     }
