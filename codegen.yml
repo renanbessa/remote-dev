@@ -1,0 +1,9 @@
+watch: true
+overwrite: true
+schema: './wpgraphql-schema.graphql'
+generates:
+  src/types/generated/wp-graphql.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
