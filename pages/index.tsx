@@ -4,7 +4,7 @@ import {Spacer, Flex} from '@chakra-ui/react'
 import {GetStaticProps} from 'next'
 import client from '@lib/apollo/client'
 import {populateI18n} from 'src/utils/populateI18n'
-import {Header, Main, Footer} from '@components'
+import {Header, Hero, Footer} from '@components'
 import Jobs from '@components/sections/jobs'
 import {GetAllJobs} from '@data/jobs/getAllJobs'
 import {AllJobs} from '@data/jobs/__generated__/AllJobs'
@@ -17,7 +17,12 @@ const Home: NextPage<JobsDataQuerie> = ({data}) => {
   return (
     <Flex direction="column" minH="100vh">
       <Header />
-      <Main />
+      <Hero
+        title={'Remote Dev'}
+        subtitle={
+          'Desenvolvedor, aqui você encontrará a sua tão desejada vaga remota'
+        }
+      />
       <Jobs jobs={data?.vagas?.edges ?? []} />
       <Spacer />
       <Footer />

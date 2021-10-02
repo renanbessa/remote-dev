@@ -9,6 +9,8 @@ import * as Query from 'src/data'
 import * as WP from 'src/types/generated/wp-graphql'
 import {sanitize} from 'src/utils/miscellaneous'
 import ErrorPage from 'next/error'
+import {Layout} from '@components/layout'
+import {Hero} from '@components'
 
 interface WordpressVagaProps {
   data: WP.Vaga
@@ -22,14 +24,25 @@ const JobPage: NextPage<WordpressVagaProps> = ({data}) => {
   }
 
   return (
-    <C.SkeletonText isLoaded={!router.isFallback} noOfLines={20}>
-      <div
-        className={'wp-content'}
-        dangerouslySetInnerHTML={{
-          __html: sanitize(data.content),
-        }}
-      />
-    </C.SkeletonText>
+    <Layout>
+      <Hero title={data.title} />
+      <C.Container>
+        <C.Grid templateColumns="repeat(12, 1fr)" gap={4}>
+          <C.GridItem colSpan={8}>
+            <C.Stack spacing={4} py={16}>
+              <C.SkeletonText isLoaded={!router.isFallback} noOfLines={20}>
+                <div
+                  className={'wp-content'}
+                  dangerouslySetInnerHTML={{
+                    __html: sanitize(data.content),
+                  }}
+                />
+              </C.SkeletonText>
+            </C.Stack>
+          </C.GridItem>
+        </C.Grid>
+      </C.Container>
+    </Layout>
   )
 }
 

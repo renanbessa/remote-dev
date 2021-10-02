@@ -1,10 +1,10 @@
 import React from 'react'
 import {NextPage} from 'next'
-import {Spacer, Flex} from '@chakra-ui/react'
-import {Header, Main, Footer} from '@components'
+import {Hero} from '@components'
 import {AllJobs} from '@data/jobs/__generated__/AllJobs'
 import {populateI18n} from 'src/utils/populateI18n'
 import {GetStaticProps} from 'next'
+import {Layout} from '@components/layout'
 
 export interface JobsDataQuerie {
   data: AllJobs
@@ -12,12 +12,9 @@ export interface JobsDataQuerie {
 
 const RemoteJobs: NextPage<JobsDataQuerie> = () => {
   return (
-    <Flex direction="column" minH="100vh">
-      <Header />
-      <Main />
-      <Spacer />
-      <Footer />
-    </Flex>
+    <Layout>
+      <Hero title={'Vagas'} subtitle={'Aqui você encontra tudo'} />
+    </Layout>
   )
 }
 
